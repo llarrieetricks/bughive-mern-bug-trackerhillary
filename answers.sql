@@ -1,1 +1,2 @@
-SELECT * FROM table_name;
+CREATE DATABASE salesDB;
+DROP DATABASE demo;
