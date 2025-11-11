@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Room Booking — UH Sugar Land Student Center</title>
+  <link rel="stylesheet" href="assets/css/styles.css">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* Ensure content doesn't hide behind fixed header */
+    main {
+      padding-top: 120px;
+      min-height: 80vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+    }
+
+    .booking-section {
+      width: 100%;
+      max-width: 650px;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      align-items: center;
+    }
+
+    .booking-section h1 {
+      text-align: center;
+      color: #C8102E;
+      margin-bottom: 0.5rem;
+    }
+
+    .booking-section .lead {
+      text-align: center;
+      margin-bottom: 2rem;
+      font-size: 1.1rem;
+    }
+
+    #bookingForm {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      padding: 2rem;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      background-color: #f9f9f9;
+    }
+
+    #bookingForm .form-group label {
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+
+    #bookingForm input,
+    #bookingForm select,
+    #bookingForm textarea {
+      padding: 0.6rem;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+      width: 100%;
+    }
+
+    #bookingForm input:focus,
+    #bookingForm select:focus,
+    #bookingForm textarea:focus {
+      outline: 2px solid #C8102E;
+    }
+
+    #bookingForm button {
+      align-self: center;
+      width: 50%;
+      padding: 0.75rem 1rem;
+      font-weight: 600;
+      background-color: #C8102E;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    #bookingForm button:hover {
+      background-color: #a00c22;
+    }
+
+    .booking-preview {
+      margin-top: 1.5rem;
+      padding: 1rem;
+      border: 1px solid #C8102E;
+      border-radius: 8px;
+      background-color: #fff0f0;
+      width: 100%;
+      text-align: center;
+    }
+
+    .error {
+      color: red;
+      font-size: 0.9rem;
+      margin-top: 0.25rem;
+    }
+
+    @media (max-width: 767px) {
+      #bookingForm button {
+        width: 80%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <nav>
+      <div class="logo">UH Sugar Land Student Center</div>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="faq.html">FAQ</a></li>
+        <li><a href="booking.html" class="active">Booking</a></li>
+        <li><a href="media.html">Media</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </nav>
+  </header>
+
+  <main role="main">
+    <section class="booking-section" aria-labelledby="booking-heading">
+      <h1 id="booking-heading">Room Booking Form</h1>
+      <p class="lead">Reserve a room for your events or meetings. Fill out the form below.</p>
+
+      <form id="bookingForm" novalidate>
+        <div class="form-group">
+          <label for="name">Full Name:</label>
+          <input type="text" id="name" name="name" placeholder="Frank Liap" required>
+          <span class="error" id="nameError"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="email">UH Email:</label>
+          <input type="email" id="email" name="email" placeholder="example@uh.edu" required>
+          <span class="error" id="emailError"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="date">Date:</label>
+          <input type="date" id="date" name="date" required>
+          <span class="error" id="dateError"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="startTime">Start Time:</label>
+          <input type="time" id="startTime" name="startTime" required>
+          <span class="error" id="startTimeError"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="endTime">End Time:</label>
+          <input type="time" id="endTime" name="endTime" required>
+          <span class="error" id="endTimeError"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="room">Select Room:</label>
+          <select id="room" name="room" required>
+            <option value="">--Choose a room--</option>
+            <option value="Cougar">Cougar</option>
+            <option value="Bayou">Bayou</option>
+            <option value="Brazos">Brazos</option>
+            <option value="Red">Red</option>
+            <option value="White">White</option>
+          </select>
+          <span class="error" id="roomError"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="purpose">Purpose:</label>
+          <input type="text" id="purpose" name="purpose" required>
+          <span class="error" id="purposeError"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="attendees">Number of Attendees:</label>
+          <input type="number" id="attendees" name="attendees" min="1" max="100" required>
+          <span class="error" id="attendeesError"></span>
+        </div>
+
+        <button type="submit" class="btn">Submit Booking</button>
+      </form>
+
+      <div id="bookingPreview" class="booking-preview" hidden>
+        <h2>Booking Confirmation Preview</h2>
+        <p id="previewContent"></p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container footer-inner">
+      <p>&copy; 2025 UH Sugar Land Student Center</p>
+      <nav aria-label="Footer navigation">
+        <a href="about.html">About</a> · <a href="contact.html">Contact</a> · <a href="faq.html">FAQ</a>
+      </nav>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="assets/js/main.js" defer></script>
+  <script>
+    // Booking form validation & preview
+    document.addEventListener("DOMContentLoaded", () => {
+      const form = document.getElementById("bookingForm");
+      const preview = document.getElementById("bookingPreview");
+      const previewContent = document.getElementById("previewContent");
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        document.querySelectorAll(".error").forEach(el => el.textContent = "");
+
+        let valid = true;
+
+        const name = form.name.value.trim();
+        if(!/^[a-zA-Z\s]+$/.test(name)){
+          document.getElementById("nameError").textContent = "Please enter a valid name (letters only).";
+          valid = false;
+        }
+
+        const email = form.email.value.trim();
+        if(!/^[^\s@]+@uh\.edu$/.test(email)){
+          document.getElementById("emailError").textContent = "Email must end with @uh.edu";
+          valid = false;
+        }
+
+        const date = form.date.value;
+        if(date === "") {
+          document.getElementById("dateError").textContent = "Please select a date.";
+          valid = false;
+        }
+
+        const startTime = form.startTime.value;
+        if(startTime === "") {
+          document.getElementById("startTimeError").textContent = "Please select a start time.";
+          valid = false;
+        }
+
+        const endTime = form.endTime.value;
+        if(endTime === "") {
+          document.getElementById("endTimeError").textContent = "Please select an end time.";
+          valid = false;
+        }
+
+        const room = form.room.value;
+        if(room === "") {
+          document.getElementById("roomError").textContent = "Please select a room.";
+          valid = false;
+        }
+
+        const purpose = form.purpose.value.trim();
+        if(purpose === "") {
+          document.getElementById("purposeError").textContent = "Please enter purpose.";
+          valid = false;
+        }
+
+        const attendees = form.attendees.value;
+        if(attendees === "" || attendees < 1) {
+          document.getElementById("attendeesError").textContent = "Please enter valid number of attendees.";
+          valid = false;
+        }
+
+        if(valid){
+          preview.hidden = false;
+          previewContent.innerHTML = `
+            <strong>Name:</strong> ${name}<br>
+            <strong>Email:</strong> ${email}<br>
+            <strong>Date:</strong> ${date}<br>
+            <strong>Time:</strong> ${startTime} - ${endTime}<br>
+            <strong>Room:</strong> ${room}<br>
+            <strong>Purpose:</strong> ${purpose}<br>
+            <strong>Attendees:</strong> ${attendees}
+          `;
+          form.reset();
+        }
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,635 @@
+/* ============================================
+   UH SUGAR LAND STUDENT CENTER WEBSITE
+   Main Stylesheet - Phase 2: Front-End
+   ============================================ */
+
+/* ============================================
+   ROOT & VARIABLES
+   ============================================ */
+:root {
+  --uh-red: #C8102E;
+  --white: #FFFFFF;
+  --black: #000000;
+  --light-gray: #F5F5F5;
+  --dark-gray: #333333;
+  --border-gray: #DDDDDD;
+  --success-green: #28a745;
+  --error-red: #dc3545;
+  
+  --font-heading: 'Montserrat', sans-serif;
+  --font-body: 'Open Sans', sans-serif;
+  
+  --transition: all 0.3s ease;
+  --box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* ============================================
+   GLOBAL STYLES
+   ============================================ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--dark-gray);
+  line-height: 1.6;
+  background-color: var(--white);
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  color: var(--black);
+  margin-bottom: 1rem;
+}
+
+h1 {
+  font-size: 2.5rem;
+}
+
+h2 {
+  font-size: 2rem;
+}
+
+h3 {
+  font-size: 1.5rem;
+}
+
+p {
+  margin-bottom: 1rem;
+}
+
+a {
+  color: var(--uh-red);
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* ============================================
+   HEADER & NAVIGATION
+   ============================================ */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: var(--uh-red);
+  color: var(--white);
+  padding: 1rem 0;
+  box-shadow: var(--box-shadow);
+  z-index: 1000;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--white);
+  font-family: var(--font-heading);
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 2rem;
+}
+
+.nav-links a {
+  color: var(--white);
+  font-weight: 500;
+  padding: 0.5rem 0;
+  border-bottom: 3px solid transparent;
+  transition: var(--transition);
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  border-bottom-color: var(--white);
+  text-decoration: none;
+}
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  gap: 0.5rem;
+}
+
+.hamburger span {
+  width: 25px;
+  height: 3px;
+  background-color: var(--white);
+  border-radius: 2px;
+  transition: var(--transition);
+}
+
+/* ============================================
+   MAIN CONTENT
+   ============================================ */
+main {
+  margin-top: 70px;
+  min-height: calc(100vh - 70px);
+}
+
+section {
+  padding: 3rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section-title {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: var(--uh-red);
+}
+
+/* ============================================
+   HERO BANNER
+   ============================================ */
+.hero {
+  background: linear-gradient(rgba(200, 16, 46, 0.7), rgba(200, 16, 46, 0.7)), 
+              url('../../img/hero-bg.jpg') center/cover;
+  color: var(--white);
+  text-align: center;
+  padding: 6rem 2rem;
+  margin-top: 70px;
+}
+
+.hero h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  color: var(--white);
+}
+
+.hero p {
+  font-size: 1.3rem;
+  margin-bottom: 2rem;
+}
+
+/* ============================================
+   BUTTONS
+   ============================================ */
+.btn {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background-color: var(--uh-red);
+  color: var(--white);
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: var(--transition);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.btn:hover {
+  background-color: #a00824;
+  text-decoration: none;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(200, 16, 46, 0.3);
+}
+
+.btn:focus {
+  outline: 3px solid var(--uh-red);
+  outline-offset: 2px;
+}
+
+.btn-outline {
+  background-color: transparent;
+  border: 2px solid var(--uh-red);
+  color: var(--uh-red);
+}
+
+.btn-outline:hover {
+  background-color: var(--uh-red);
+  color: var(--white);
+}
+
+/* ============================================
+   CARDS & GRID
+   ============================================ */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  margin: 2rem 0;
+}
+
+.card {
+  background-color: var(--light-gray);
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: var(--box-shadow);
+  transition: var(--transition);
+  border-left: 5px solid var(--uh-red);
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.card h3 {
+  color: var(--uh-red);
+}
+
+/* ============================================
+   FORMS
+   ============================================ */
+form {
+  max-width: 600px;
+  margin: 2rem auto;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: var(--dark-gray);
+}
+
+input[type="text"],
+input[type="email"],
+input[type="date"],
+input[type="time"],
+input[type="number"],
+select,
+textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid var(--border-gray);
+  border-radius: 4px;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  transition: var(--transition);
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--uh-red);
+  box-shadow: 0 0 0 3px rgba(200, 16, 46, 0.1);
+}
+
+textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.error {
+  color: var(--error-red);
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}
+
+input.invalid,
+select.invalid,
+textarea.invalid {
+  border-color: var(--error-red);
+}
+
+.success-message {
+  background-color: var(--success-green);
+  color: var(--white);
+  padding: 1rem;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+}
+
+/* ============================================
+   FAQ SECTION
+   ============================================ */
+.faq-item {
+  margin-bottom: 1.5rem;
+  border: 1px solid var(--border-gray);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.faq-button {
+  width: 100%;
+  padding: 1rem;
+  background-color: var(--light-gray);
+  border: none;
+  text-align: left;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--dark-gray);
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.faq-button:hover {
+  background-color: #e8e8e8;
+}
+
+.faq-button:focus {
+  outline: 3px solid var(--uh-red);
+  outline-offset: -3px;
+}
+
+.faq-button::after {
+  content: '▼';
+  transition: transform 0.3s ease;
+  color: var(--uh-red);
+}
+
+.faq-button[aria-expanded="true"]::after {
+  transform: rotate(180deg);
+}
+
+.faq-content {
+  display: none;
+  padding: 1rem;
+  background-color: var(--white);
+}
+
+.faq-content.active {
+  display: block;
+}
+
+/* ============================================
+   GALLERY
+   ============================================ */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.gallery-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: var(--box-shadow);
+  height: 250px;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: var(--transition);
+}
+
+.gallery-item:hover img {
+  transform: scale(1.05);
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+footer {
+  background-color: var(--dark-gray);
+  color: var(--white);
+  padding: 2rem;
+  text-align: center;
+  margin-top: 3rem;
+}
+
+footer p {
+  margin: 0.5rem 0;
+  color: var(--white);
+}
+
+footer a {
+  color: var(--white);
+  text-decoration: underline;
+}
+
+footer a:hover {
+  color: var(--light-gray);
+}
+
+/* ============================================
+   EMBEDDED MEDIA
+   ============================================ */
+.video-container {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  margin: 2rem auto;
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.video-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.map-container {
+  width: 100%;
+  max-width: 600px;
+  height: 400px;
+  margin: 2rem auto;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: var(--box-shadow);
+}
+
+/* ============================================
+   PREVIEW SECTION (for confirmation)
+   ============================================ */
+.preview {
+  background-color: var(--light-gray);
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin-top: 2rem;
+  border-left: 5px solid var(--success-green);
+  display: none;
+}
+
+.preview.show {
+  display: block;
+}
+
+.preview h3 {
+  color: var(--success-green);
+}
+
+.preview-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--border-gray);
+}
+
+.preview-item:last-child {
+  border-bottom: none;
+}
+
+.preview-label {
+  font-weight: 600;
+}
+
+/* ============================================
+   ACCESSIBILITY & FOCUS STATES
+   ============================================ */
+:focus-visible {
+  outline: 3px solid var(--uh-red);
+  outline-offset: 2px;
+}
+
+button:focus-visible {
+  outline: 3px solid var(--uh-red);
+  outline-offset: 2px;
+}
+
+/* Skip to main content link */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--uh-red);
+  color: var(--white);
+  padding: 8px;
+  text-decoration: none;
+  z-index: 100;
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
+/* ============================================
+   RESPONSIVE DESIGN (Mobile First)
+   ============================================ */
+
+/* Mobile: 320px and up */
+@media (max-width: 768px) {
+  nav {
+    padding: 0 1rem;
+  }
+
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 70px;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    background-color: var(--uh-red);
+    gap: 0;
+    padding: 1rem 0;
+  }
+
+  .nav-links.active {
+    display: flex;
+  }
+
+  .nav-links a {
+    padding: 1rem 2rem;
+    border-bottom: none;
+    border-left: 3px solid transparent;
+  }
+
+  .nav-links a:hover,
+  .nav-links a.active {
+    border-left-color: var(--white);
+    border-bottom: none;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  .hero {
+    padding: 4rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2rem;
+  }
+
+  .hero p {
+    font-size: 1rem;
+  }
+
+  section {
+    padding: 2rem 1rem;
+  }
+
+  .cards-grid {
+    grid-template-columns: 1fr;
+  }
+
+  form {
+    max-width: 100%;
+  }
+
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Tablet: 769px and up */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .gallery-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Desktop: 1025px and up */
+@media (min-width: 1025px) {
+  section {
+    padding: 3rem 2rem;
+  }
+}
+
+/* Print styles */
+@media print {
+  header,
+  footer,
+  .nav-links {
+    display: none;
+  }
+
+  main {
+    margin-top: 0;
+  }
+}

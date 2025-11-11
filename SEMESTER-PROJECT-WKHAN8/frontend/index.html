@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home — UH Sugar Land Student Center</title>
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    body { margin:0; font-family:'Open Sans', sans-serif; }
+    .site-header { background:#C8102E; color:white; }
+    .header-inner { display:flex; justify-content:space-between; align-items:center; padding:1rem 2rem; }
+    .logo { text-decoration:none; color:white; }
+    .logo-mark { font-weight:700; font-size:1.5rem; }
+    .logo-text { font-weight:600; }
+    .site-nav ul { list-style:none; display:flex; gap:1.5rem; margin:0; padding:0; }
+    .site-nav a { color:white; text-decoration:none; font-weight:600; font-size:1rem; }
+    .site-nav a.active { text-decoration:underline; }
+
+    .hero { text-align:center; padding:4rem 2rem; background:url('https://images.pexels.com/photos/4145192/pexels-photo-4145192.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260') center/cover no-repeat; color:white; border-radius:8px; }
+    .hero h1 { font-family:'Montserrat', sans-serif; font-size:2.5rem; margin-bottom:1rem; text-shadow:1px 1px 5px rgba(0,0,0,0.7); }
+    .hero p { font-size:1.2rem; margin-bottom:2rem; text-shadow:1px 1px 5px rgba(0,0,0,0.6); }
+    .hero .btn { padding:0.8rem 1.5rem; background:#C8102E; color:white; border:none; border-radius:5px; cursor:pointer; font-weight:600; text-decoration:none; }
+    .hero .btn:hover { background:#a00f25; }
+
+    .features { text-align:center; padding:3rem 2rem; }
+    .features h2 { font-family:'Montserrat', sans-serif; font-size:2rem; margin-bottom:1rem; color:#C8102E; }
+    .features p { font-size:1rem; margin-bottom:2rem; color:#000; }
+    .features-grid { display:flex; flex-wrap:wrap; justify-content:center; gap:1.5rem; }
+    .features-grid img { width:100%; max-width:300px; border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,0.2); display:block; }
+
+    .site-footer { background:#333; color:white; padding:1rem; text-align:center; }
+    .site-footer a { color:white; text-decoration:none; margin:0 0.5rem; }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <div class="logo-mark">UH</div>
+        <div class="logo-text">Sugar Land Student Center</div>
+      </a>
+      <nav class="site-nav">
+        <ul>
+          <li><a href="index.html" class="active">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="booking.html">Booking</a></li>
+          <li><a href="media.html">Media</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <main>
+    <section class="hero">
+      <h1>Welcome to the UH Sugar Land Student Center</h1>
+      <p>The UH Sugar Land Student Center is designed to provide students with a modern, comfortable space to study, collaborate, and participate in campus activities. Our mission is to support student growth and engagement in a welcoming environment.</p>
+      <a href="booking.html" class="btn">Book a Room</a>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+      <h2>Explore Our Services</h2>
+      <p>Workshops, Events, Study Rooms, Student Activities & more!</p>
+      <div class="features-grid">
+        <img src="https://images.pexels.com/photos/4145196/pexels-photo-4145196.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260" alt="Student Workshop">
+        <img src="https://images.pexels.com/photos/3184307/pexels-photo-3184307.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260" alt="Student Collaboration">
+        <img src="https://images.pexels.com/photos/1438080/pexels-photo-1438080.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260" alt="Campus Events">
+        <img src="https://images.pexels.com/photos/374074/pexels-photo-374074.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260" alt="Study Rooms">
+        <img src="https://images.pexels.com/photos/3184325/pexels-photo-3184325.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260" alt="Student Lounge">
+        <img src="https://images.pexels.com/photos/256401/pexels-photo-256401.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260" alt="Community Gathering">
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <p>&copy; 2025 UH Sugar Land Student Center</p>
+    <nav>
+      <a href="about.html">About</a> · 
+      <a href="contact.html">Contact</a> · 
+      <a href="faq.html">FAQ</a>
+    </nav>
+  </footer>
+
+</body>
+</html>
