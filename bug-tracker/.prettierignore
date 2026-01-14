@@ -1,0 +1,15 @@
+node_modules
+dist
+build
+coverage
+.git
+.env
+.env.local
+*.md
+package.json
+package-lock.json
+npm-shrinkwrap.json
+public
+backend/node_modules
+frontend/node_modules
+frontend/dist
