@@ -1,3 +1,87 @@
 {
-    "postman.settings.dotenv-detection-notification-visibility": false
+    // Postman Configuration
+    "postman.settings.dotenv-detection-notification-visibility": false,
+
+    // CSS/Tailwind Configuration - Suppress known warnings
+    "css.lint.unknownAtRules": "ignore",
+    "css.lint.compatibleVendorPrefixes": "ignore",
+    "css.lint.vendorPrefix": "ignore",
+    "stylelint.enable": false,
+
+    // Editor Configuration
+    "[css]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[jsx]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[json]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    
+    // Prettier Configuration
+    "prettier.semi": true,
+    "prettier.singleQuote": true,
+    "prettier.trailingComma": "es5",
+    "prettier.tabWidth": 2,
+
+    // Tailwind CSS IntelliSense
+    "tailwindCSS.emmetCompletions": true,
+    "tailwindCSS.classAttributes": [
+        "class",
+        "className",
+        "ngClass"
+    ],
+
+    // Files Configuration
+    "files.exclude": {
+        "**/node_modules": true,
+        "**/.git": true,
+        "**/.DS_Store": true
+    },
+    "files.watcherExclude": {
+        "**/node_modules": true,
+        "**/dist": true,
+        "**/.git": true
+    },
+
+    // Search Configuration
+    "search.exclude": {
+        "**/node_modules": true,
+        "**/dist": true,
+        "**/.git": true,
+        "**/coverage": true
+    },
+
+    // ESLint Configuration (if you add it later)
+    "eslint.validate": [
+        "javascript",
+        "javascriptreact",
+        "typescript",
+        "typescriptreact"
+    ],
+
+    // Editor Preferences
+    "editor.formatOnSave": true,
+    "editor.formatOnPaste": true,
+    "editor.codeActionsOnSave": {
+        "source.fixAll": "explicit"
+    },
+    "editor.wordWrap": "on",
+    "editor.rulers": [80, 120],
+
+    // Extension Specific
+    "emmet.preferences": {
+        "css.unitAliases": {
+            "w": "width",
+            "h": "height"
+        }
+    },
+
+    // Problems Panel
+    "problems.showCurrentInEditor": true,
+    "problems.autoReveal": true
 }

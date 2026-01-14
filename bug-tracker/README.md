@@ -234,6 +234,38 @@ bughive/
 
 ---
 
+## 🚢 Deployment
+
+### Quick Deployment Guide
+
+The easiest way to deploy BugHive is using the automated setup script:
+
+```bash
+bash deploy.sh
+```
+
+This will guide you through:
+1. Setting up MongoDB Atlas (free cloud database)
+2. Deploying backend to Render
+3. Deploying frontend to Vercel
+
+**For detailed deployment instructions**, see:
+- [**VERCEL_DEPLOYMENT_GUIDE.md**](VERCEL_DEPLOYMENT_GUIDE.md) - Complete deployment walkthrough
+- [**vercel.json**](vercel.json) - Vercel configuration
+
+### Live Demo
+
+🎉 **BugHive is live!** Visit: [https://bughive-mern-bug-trackerhillary.vercel.app](https://bughive-mern-bug-trackerhillary.vercel.app)
+
+### Deployment Stack
+
+- **Frontend**: React + Vite → **Vercel** (CDN, Auto-scaling)
+- **Backend**: Express.js → **Render** (Node.js, Auto-restart on crash)
+- **Database**: MongoDB → **MongoDB Atlas** (Cloud-hosted, Free tier available)
+- **Security**: HTTPS, Environment variables, IP whitelisting
+
+---
+
 ## 👨‍💻 Author
 
 <div align="center">
