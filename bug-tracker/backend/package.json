@@ -1,16 +1,22 @@
 {
-  "name": "backend",
+  "name": "bughive-backend",
   "version": "1.0.0",
+  "description": "BugHive Backend - Node.js/Express REST API",
   "main": "server.js",
+  "type": "commonjs",
   "scripts": {
     "dev": "node --watch server.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
+  "keywords": [
+    "bug-tracking",
+    "api",
+    "express",
+    "mongodb"
+  ],
   "author": "",
   "license": "ISC",
-  "description": "",
   "dependencies": {
     "bcryptjs": "^3.0.3",
     "cors": "^2.8.5",
@@ -19,5 +25,8 @@
     "jsonwebtoken": "^9.0.3",
     "mongoose": "^9.0.0",
     "swagger-ui-express": "^5.0.1"
+  },
+  "engines": {
+    "node": ">=14.0.0"
   }
 }
