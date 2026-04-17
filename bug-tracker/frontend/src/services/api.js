@@ -1,11 +1,27 @@
 import axios from 'axios'
 
+const envBaseUrl = import.meta.env.VITE_API_URL?.trim()
+const isProdBuild = import.meta.env.PROD
+
+export const backendSetupMessage =
+  'Backend API is not configured yet. Frontend preview is live, and auth/bug features will be enabled after backend deployment.'
+export const isBackendConfigured = !isProdBuild || Boolean(envBaseUrl)
+
+const normalizedBaseUrl = envBaseUrl ? envBaseUrl.replace(/\/+$/, '') : '/api'
+const apiBaseUrl = normalizedBaseUrl.endsWith('/api') ? normalizedBaseUrl : `${normalizedBaseUrl}/api`
+
 const api = axios.create({
-  baseURL: '/api',
+  baseURL: apiBaseUrl,
 })
 
 // Attach JWT token to every request if present
 api.interceptors.request.use((config) => {
+  if (!isBackendConfigured) {
+    const setupError = new Error(backendSetupMessage)
+    setupError.response = { data: { message: backendSetupMessage } }
+    return Promise.reject(setupError)
+  }
+
   const token = localStorage.getItem('token')
   if (token) {
     config.headers.Authorization = `Bearer ${token}`

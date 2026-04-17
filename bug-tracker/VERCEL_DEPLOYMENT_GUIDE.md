@@ -4,7 +4,7 @@
 
 This guide covers deploying your BugHive MERN stack application to Vercel:
 - **Frontend**: React + Vite → Vercel (Recommended)
-- **Backend**: Express.js → Render or Railway (Vercel now charges for serverless functions)
+- **Backend**: Express.js → Render
 - **Database**: MongoDB Atlas (Cloud-hosted MongoDB)
 
 ---
@@ -31,7 +31,7 @@ VITE_API_URL=https://your-backend-url.com
 
 **Backend Environment** (`.env`):
 ```
-MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/bughive
+MONGO_URI=mongodb+srv://username:password@cluster.mongodb.net/bughive
 PORT=5000
 NODE_ENV=production
 JWT_SECRET=your_jwt_secret_key_here
@@ -41,7 +41,7 @@ JWT_SECRET=your_jwt_secret_key_here
 
 ## Phase 2: Deploy Backend API
 
-### Option A: Deploy to Render (Recommended for Node.js)
+### Deploy to Render
 
 #### Step 1: Create Render Account
 1. Visit https://render.com
@@ -64,46 +64,16 @@ In Render dashboard:
 1. Go to your service → Environment
 2. Add variables:
    ```
-   MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/bughive
+   MONGO_URI=mongodb+srv://username:password@cluster.mongodb.net/bughive
    JWT_SECRET=your-secret-key
    NODE_ENV=production
+   FRONTEND_URL=https://your-frontend.vercel.app
    ```
 
 #### Step 4: Deploy
 - Click "Deploy"
 - Wait for green "Live" status
 - Copy your backend URL: `https://bughive-backend.onrender.com`
-
-### Option B: Deploy to Railway
-
-#### Step 1: Create Railway Account
-1. Visit https://railway.app
-2. Sign up with GitHub
-3. Authorize Railway
-
-#### Step 2: Create New Project
-1. Click "New Project"
-2. Select "Deploy from GitHub repo"
-3. Choose `bughive-mern-bug-trackerhillary`
-
-#### Step 3: Add Environments
-1. Variables → Add Variables:
-   ```
-   MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/bughive
-   JWT_SECRET=your-secret-key
-   NODE_ENV=production
-   PORT=8000
-   ```
-
-#### Step 4: Configure Start Command
-1. Go to Settings
-2. Start command: `npm install --prefix backend && node backend/server.js`
-
-#### Step 5: Deploy
-- Click "Deploy"
-- Get your backend URL from Railway dashboard
-
----
 
 ## Phase 3: Set Up MongoDB Atlas
 
@@ -163,20 +133,16 @@ When importing the repository, you'll see:
 
 **Build and Output Settings**:
 - Click "Edit" in "Build and Output Settings"
-- **Build Command**: `npm install --prefix frontend && npm run build --prefix frontend`
+- **Build Command**: `npm run build --prefix frontend`
 - **Output Directory**: `frontend/dist`
-- **Install Command**: `npm install`
+- **Install Command**: `npm install --prefix frontend`
 
 ### Step 3: Environment Variables
 
-Before deploying, add environment variables:
+For frontend-first deployment, `VITE_API_URL` is optional.
 
-1. In Vercel → Project Settings → Environment Variables
-2. Add:
-   ```
-   VITE_API_URL=https://your-backend-url.com
-   ```
-   Replace with your actual backend URL from Render/Railway
+1. If backend is not deployed yet: skip this for now.
+2. If backend is already deployed: set `VITE_API_URL=https://your-backend-url.com` in Vercel Project Settings → Environment Variables.
 
 ### Step 4: Deploy
 
@@ -191,21 +157,13 @@ Before deploying, add environment variables:
 
 ### Step 1: Update Frontend API URL
 
-Once backend is deployed, update `.env.production`:
+Once backend is deployed, set `VITE_API_URL` in Vercel Project Settings:
 
-```bash
-# Frontend/.env.production
+```
 VITE_API_URL=https://bughive-backend.onrender.com
 ```
 
-Then redeploy:
-```bash
-git add frontend/.env.production
-git commit -m "Update API URL for production"
-git push origin main
-```
-
-Vercel will auto-redeploy.
+Then trigger a redeploy from Vercel dashboard (or push a new commit).
 
 ### Step 2: Update CORS in Backend
 
@@ -247,7 +205,7 @@ https://bughive-mern-bug-trackerhillary.vercel.app
 
 ### Test MongoDB Connection
 ```bash
-# Check server logs in Render/Railway dashboard
+# Check server logs in Render dashboard
 # Should see: "MongoDB Connected"
 # Or use MongoDB Atlas → Metrics to see active connections
 ```
@@ -271,7 +229,7 @@ https://bughive-mern-bug-trackerhillary.vercel.app
 **Error**: `MongoDB connection failed`
 
 **Solution**:
-1. Check MongoDB URI in environment variables (Render/Railway)
+1. Check MongoDB URI in Render environment variables
 2. Verify IP whitelist includes 0.0.0.0/0 in MongoDB Atlas
 3. Test connection: `mongosh "mongodb+srv://..."`
 
@@ -290,7 +248,7 @@ https://bughive-mern-bug-trackerhillary.vercel.app
 **Error**: API calls return 401 or undefined variables
 
 **Solution**:
-1. Verify all env vars are set in Vercel/Render/Railway
+1. Verify all env vars are set in Vercel and Render
 2. Restart deployment
 3. Check variable names match exactly
 4. Don't commit `.env` files to Git!
@@ -300,7 +258,7 @@ https://bughive-mern-bug-trackerhillary.vercel.app
 ## Post-Deployment Checklist
 
 - [ ] Frontend deployed to Vercel
-- [ ] Backend deployed to Render/Railway
+- [ ] Backend deployed to Render
 - [ ] MongoDB Atlas cluster running
 - [ ] Environment variables set in all platforms
 - [ ] CORS configured for production URLs
@@ -318,14 +276,14 @@ https://bughive-mern-bug-trackerhillary.vercel.app
 
 1. **Change MongoDB Atlas IP Whitelist** (after testing):
    - Remove "Allow from Anywhere"
-   - Add only your Render/Railway server IPs
+   - Restrict access based on your deployment/network policy
 
 2. **Secure JWT Secret**:
    - Use strong, random string (32+ characters)
    - Store only in environment variables
    - Never commit to Git
 
-3. **Enable HTTPS** (Vercel/Render/Railway do this automatically)
+3. **Enable HTTPS** (Vercel and Render do this automatically)
 
 4. **Set NODE_ENV=production** in backend environment
 
@@ -375,14 +333,14 @@ npm run preview  # Preview production build
 
 ## Next Steps
 
-1. **Choose backend host**: Render (recommended) or Railway
+1. **Choose backend host**: Render
 2. **Set up MongoDB Atlas**: Create free cluster
 3. **Get connection string**: From MongoDB Atlas
-4. **Deploy backend**: To Render/Railway
+4. **Deploy backend**: To Render
 5. **Update frontend env**: Add backend URL
 6. **Deploy frontend**: To Vercel
 7. **Test everything**: Login, create bugs, dark mode
-8. **Monitor logs**: Check Render/Railway logs for errors
+8. **Monitor logs**: Check Render logs for errors
 
 **Estimated time**: 30-45 minutes for first-time setup
 

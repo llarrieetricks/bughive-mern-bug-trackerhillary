@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
+import { isBackendConfigured } from '../services/api'
 
 export default function Home() {
   const { user } = useAuth()
@@ -18,7 +19,7 @@ export default function Home() {
             <Link to="/dashboard" className="inline-flex items-center gap-2 bg-white text-blue-700 font-semibold px-8 py-3 rounded-lg hover:bg-blue-50 transition-colors text-lg shadow-lg">
               Go to Dashboard →
             </Link>
-          ) : (
+          ) : isBackendConfigured ? (
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link to="/register" className="inline-flex items-center gap-2 bg-white text-blue-700 font-semibold px-8 py-3 rounded-lg hover:bg-blue-50 transition-colors text-lg shadow-lg">
                 Get Started Free
@@ -27,12 +28,21 @@ export default function Home() {
                 Sign In
               </Link>
             </div>
+          ) : (
+            <div className="max-w-2xl mx-auto bg-white/10 border border-white/20 rounded-xl p-5 text-left sm:text-center">
+              <p className="text-blue-100">
+                Frontend preview is live on Vercel. Authentication and live bug syncing will unlock after the backend is deployed on Render.
+              </p>
+              <a href="#features" className="inline-flex mt-4 items-center gap-2 bg-white text-blue-700 font-semibold px-6 py-2.5 rounded-lg hover:bg-blue-50 transition-colors">
+                Explore Features
+              </a>
+            </div>
           )}
         </div>
       </section>
 
       {/* Features */}
-      <section className="py-20 px-4 max-w-6xl mx-auto">
+      <section id="features" className="py-20 px-4 max-w-6xl mx-auto">
         <h2 className="text-3xl font-bold text-center text-gray-900 dark:text-gray-100 mb-12">
           Everything you need to squash bugs
         </h2>

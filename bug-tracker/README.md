@@ -101,7 +101,7 @@
    Create a `.env` file in the backend directory:
    ```env
    PORT=5000
-   MONGODB_URI=mongodb://localhost:27017/bughive
+   MONGO_URI=mongodb://localhost:27017/bughive
    JWT_SECRET=your_super_secret_jwt_key_here
    ```
 
@@ -176,6 +176,10 @@ bughive/
 ---
 
 ## 🔌 API Endpoints
+
+### API Documentation (Swagger)
+- Interactive docs: `/api/docs`
+- Raw OpenAPI JSON: `/api/docs.json`
 
 ### Authentication
 | Method | Endpoint | Description |

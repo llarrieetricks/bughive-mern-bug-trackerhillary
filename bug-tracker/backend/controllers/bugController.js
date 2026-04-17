@@ -1,4 +1,12 @@
 const Bug = require("../models/Bug");
+const User = require("../models/User");
+const mongoose = require("mongoose");
+
+const canModifyBug = (user, bug) => {
+  return (
+    user?.role === "admin" || bug.createdBy.toString() === user?._id.toString()
+  );
+};
 
 // @desc    Get all bugs
 // @route   GET /api/bugs
@@ -74,9 +82,49 @@ const updateBug = async (req, res) => {
       return res.status(404).json({ message: "Bug not found" });
     }
 
+    if (!canModifyBug(req.user, bug)) {
+      return res
+        .status(403)
+        .json({ message: "Not authorized to update this bug" });
+    }
+
+    const allowedFields = [
+      "title",
+      "description",
+      "status",
+      "priority",
+      "assignedTo",
+      "project",
+      "tags",
+    ];
+
+    const updates = {};
+    for (const field of allowedFields) {
+      if (Object.prototype.hasOwnProperty.call(req.body, field)) {
+        updates[field] = req.body[field];
+      }
+    }
+
+    if (Object.keys(updates).length === 0) {
+      return res.status(400).json({ message: "No valid fields provided for update" });
+    }
+
+    if (Object.prototype.hasOwnProperty.call(updates, "assignedTo")) {
+      if (updates.assignedTo === null || updates.assignedTo === "") {
+        updates.assignedTo = null;
+      } else if (!mongoose.isValidObjectId(updates.assignedTo)) {
+        return res.status(400).json({ message: "Invalid assigned user id" });
+      } else {
+        const assignedUser = await User.findById(updates.assignedTo).select("_id");
+        if (!assignedUser) {
+          return res.status(404).json({ message: "Assigned user not found" });
+        }
+      }
+    }
+
     const updatedBug = await Bug.findByIdAndUpdate(
       req.params.id,
-      req.body,
+      updates,
       { new: true, runValidators: true }
     )
       .populate("createdBy", "name email")
@@ -99,6 +147,12 @@ const deleteBug = async (req, res) => {
       return res.status(404).json({ message: "Bug not found" });
     }
 
+    if (!canModifyBug(req.user, bug)) {
+      return res
+        .status(403)
+        .json({ message: "Not authorized to delete this bug" });
+    }
+
     await Bug.findByIdAndDelete(req.params.id);
     res.json({ message: "Bug deleted successfully" });
   } catch (error) {
@@ -119,7 +173,31 @@ const assignBug = async (req, res) => {
       return res.status(404).json({ message: "Bug not found" });
     }
 
-    bug.assignedTo = userId;
+    if (!canModifyBug(req.user, bug)) {
+      return res
+        .status(403)
+        .json({ message: "Not authorized to assign this bug" });
+    }
+
+    if (typeof userId === "undefined") {
+      return res.status(400).json({ message: "userId is required" });
+    }
+
+    if (userId === null || userId === "") {
+      bug.assignedTo = null;
+    } else {
+      if (!mongoose.isValidObjectId(userId)) {
+        return res.status(400).json({ message: "Invalid user id" });
+      }
+
+      const assignedUser = await User.findById(userId).select("_id");
+      if (!assignedUser) {
+        return res.status(404).json({ message: "User not found" });
+      }
+
+      bug.assignedTo = userId;
+    }
+
     await bug.save();
 
     const updatedBug = await Bug.findById(bug._id)

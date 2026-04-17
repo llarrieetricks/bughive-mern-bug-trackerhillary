@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # BugHive Deployment Setup Script
-# Guides you through deploying to Vercel, Render, and MongoDB Atlas
+# Guides you through deploying frontend to Vercel, backend to Render, and MongoDB Atlas
 
 echo ""
 echo "╔════════════════════════════════════════════════════════════╗"
@@ -89,9 +89,10 @@ echo "   - Environment: Node"
 echo "   - Build Command: npm install --prefix backend"
 echo "   - Start Command: node backend/server.js"
 echo "6. Click 'Environment' → Add variables:"
-echo "   - MONGODB_URI: [Your connection string]"
+echo "   - MONGO_URI: [Your connection string]"
 echo "   - JWT_SECRET: [Generate random 32-char string]"
 echo "   - NODE_ENV: production"
+echo "   - FRONTEND_URL: [Your Vercel frontend URL]"
 echo "7. Click 'Create Web Service'"
 echo "8. Wait for deployment (green 'Live' status)"
 echo "9. Copy your backend URL"
@@ -192,8 +193,8 @@ echo ""
 echo "Important security recommendations:"
 echo "1. MongoDB Atlas IP Whitelist:"
 echo "   - Security → Network Access"
-echo "   - Remove '0.0.0.0/0' (allow everywhere)"
-echo "   - Add only your Render server IP (shown in Render settings)"
+echo "   - Review access policy for production"
+echo "   - Remove '0.0.0.0/0' if your deployment/network model supports tighter rules"
 echo "2. Verify .env files are in .gitignore"
 echo "3. Verify no sensitive data in public directories"
 echo ""
@@ -228,5 +229,5 @@ echo "Documentation:"
 echo "- Full guide: VERCEL_DEPLOYMENT_GUIDE.md"
 echo "- Troubleshooting: VSCODE_TROUBLESHOOTING.md"
 echo ""
-echo "Questions? Check GitHub repository or AWS documentation."
+echo "Questions? Check GitHub repository or platform documentation."
 echo ""

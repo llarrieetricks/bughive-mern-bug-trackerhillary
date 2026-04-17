@@ -60,9 +60,10 @@
 - [ ] Auto-deploy on push: **enabled**
 
 ### Environment Variables
-- [ ] `MONGODB_URI` set with Atlas connection string
+- [ ] `MONGO_URI` set with Atlas connection string
 - [ ] `JWT_SECRET` set (random 32+ character string)
 - [ ] `NODE_ENV` set to `production`
+- [ ] `FRONTEND_URL` set to your Vercel URL
 - [ ] No sensitive data in code
 
 ### Deployment
@@ -93,13 +94,14 @@
 - [ ] Root directory set to `./`
 
 ### Build Settings
-- [ ] Build command: `npm install --prefix frontend && npm run build --prefix frontend`
+- [ ] Build command: `npm run build --prefix frontend`
 - [ ] Output directory: `frontend/dist`
-- [ ] Install command: `npm install --legacy-peer-deps`
+- [ ] Install command: `npm install --prefix frontend`
 - [ ] Node.js version: 18+ (verify in settings)
 
 ### Environment Variables
-- [ ] `VITE_API_URL` set to backend URL (e.g., `https://bughive-backend.onrender.com`)
+- [ ] Optional for frontend-first launch: `VITE_API_URL` may be empty until backend goes live
+- [ ] After backend deploy: set `VITE_API_URL` to backend URL (e.g., `https://bughive-backend.onrender.com`)
 - [ ] All variables consistent across environments
 
 ### Deployment
@@ -191,9 +193,8 @@
 - [ ] Check logs weekly for errors
 
 ### Security Hardening
-- [ ] MongoDB IP whitelist updated to only Render server IP
-  - Get Render server IP from: Dashboard → Settings → IP Whitelist
-  - Remove 0.0.0.0/0 (allow everywhere)
+- [ ] MongoDB Atlas network access reviewed for production
+  - Remove 0.0.0.0/0 if your deployment/network model supports tighter rules
 - [ ] JWT_SECRET is strong and unique
 - [ ] All sensitive data in environment variables only
 - [ ] Enable Render monitoring/alerts

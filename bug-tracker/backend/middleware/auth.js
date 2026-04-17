@@ -9,11 +9,17 @@ const protect = async (req, res, next) => {
     req.headers.authorization.startsWith("Bearer")
   ) {
     try {
+      if (!process.env.JWT_SECRET) {
+        return res
+          .status(500)
+          .json({ message: "Server auth configuration is missing" });
+      }
+
       // Get token from header
       token = req.headers.authorization.split(" ")[1];
 
       // Verify token
-      const decoded = jwt.verify(token, process.env.JWT_SECRET || "your_jwt_secret");
+      const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
       // Get user from token (exclude password)
       req.user = await User.findById(decoded.id).select("-password");
@@ -27,9 +33,7 @@ const protect = async (req, res, next) => {
       console.error(error);
       return res.status(401).json({ message: "Not authorized, token failed" });
     }
-  }
-
-  if (!token) {
+  } else if (!token) {
     return res.status(401).json({ message: "Not authorized, no token" });
   }
 };

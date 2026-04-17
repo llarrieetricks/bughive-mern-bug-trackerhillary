@@ -1,24 +1,13 @@
 {
   "version": 2,
-  "buildCommand": "npm install --prefix frontend && npm run build --prefix frontend",
+  "buildCommand": "npm run build --prefix frontend",
   "outputDirectory": "frontend/dist",
-  "installCommand": "npm install --legacy-peer-deps",
+  "installCommand": "npm install --prefix frontend",
   "framework": "vite",
-  "env": {
-    "VITE_API_URL": {
-      "description": "Backend API URL for production"
-    }
-  },
-  "functions": {
-    "api/**/*.js": {
-      "runtime": "nodejs18.x"
-    }
-  },
-  "routes": [
+  "rewrites": [
     {
-      "src": "/(.*)",
-      "dest": "frontend/dist/index.html",
-      "status": 200
+      "source": "/((?!api/|assets/|.*\\..*).*)",
+      "destination": "/index.html"
     }
   ],
   "headers": [

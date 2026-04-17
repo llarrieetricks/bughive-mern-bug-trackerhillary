@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { register } from '../services/api'
+import { backendSetupMessage, isBackendConfigured, register } from '../services/api'
 import { useAuth } from '../context/AuthContext'
 
 export default function Register() {
@@ -9,6 +9,21 @@ export default function Register() {
   const [loading, setLoading] = useState(false)
   const { loginUser }         = useAuth()
   const navigate              = useNavigate()
+
+  if (!isBackendConfigured) {
+    return (
+      <div className="min-h-[calc(100vh-4rem)] flex items-center justify-center px-4 py-12">
+        <div className="w-full max-w-xl">
+          <div className="card text-center">
+            <div className="text-5xl mb-3">🚧</div>
+            <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Frontend Preview Mode</h1>
+            <p className="text-sm text-gray-600 dark:text-gray-300 mt-3">{backendSetupMessage}</p>
+            <Link to="/" className="inline-flex mt-6 btn-primary text-sm py-2 px-4">Back to Home</Link>
+          </div>
+        </div>
+      </div>
+    )
+  }
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value })
 

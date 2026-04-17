@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: bughive-backend
+    env: node
+    plan: free
+    buildCommand: npm install && npm run start
+    startCommand: node backend/server.js
+    region: oregon
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGO_URI
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: PORT
+        value: "10000"
+
+databases:
+  - name: bughive-db
+    dbName: bughive
+    user: bughive_user
+    region: oregon

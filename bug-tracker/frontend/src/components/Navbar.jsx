@@ -1,6 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { useTheme } from '../context/ThemeContext'
+import { isBackendConfigured } from '../services/api'
 
 export default function Navbar() {
   const { user, logoutUser } = useAuth()
@@ -47,14 +48,20 @@ export default function Navbar() {
                 </button>
               </>
             ) : (
-              <>
-                <Link to="/login" className="text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
-                  Login
-                </Link>
-                <Link to="/register" className="btn-primary text-sm py-1.5 px-3">
-                  Register
-                </Link>
-              </>
+              isBackendConfigured ? (
+                <>
+                  <Link to="/login" className="text-sm font-medium text-gray-700 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                    Login
+                  </Link>
+                  <Link to="/register" className="btn-primary text-sm py-1.5 px-3">
+                    Register
+                  </Link>
+                </>
+              ) : (
+                <span className="text-xs sm:text-sm font-medium text-amber-800 dark:text-amber-200 bg-amber-100 dark:bg-amber-900/40 px-3 py-1.5 rounded-full border border-amber-200 dark:border-amber-700">
+                  Frontend Preview
+                </span>
+              )
             )}
           </div>
         </div>
